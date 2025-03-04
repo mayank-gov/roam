@@ -2,11 +2,17 @@
 'use client';
 
 import React, { ButtonHTMLAttributes } from 'react';
+import {IconType} from "react-icons";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: 'primary' | 'secondary' | 'outline' | 'danger';
+    // Extended variant types to match ontario classes
+    variant?: 'primary' | 'secondary' | 'tertiary' | 'outline' | 'danger';
     size?: 'sm' | 'md' | 'lg';
     isLoading?: boolean;
+    fullWidth?: boolean;
+    color?: 'default' | 'blue' | 'green' | 'red' | 'yellow' | 'purple';
+    icon?: IconType;
+    iconPosition?: 'start' | 'end';
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -16,28 +22,59 @@ const Button: React.FC<ButtonProps> = ({
                                            size = 'md',
                                            isLoading = false,
                                            disabled,
+                                           fullWidth = false,
+                                           color = 'default',
+                                           icon: Icon,
+                                           iconPosition = 'end',
                                            ...props
                                        }) => {
+    // Base styles with Tailwind
     const baseStyles = 'inline-flex items-center justify-center rounded font-medium focus:outline-none transition-colors';
 
+    // Width styles
+    const widthStyles = fullWidth ? 'w-full' : '';
+
+    // Ontario class mapping
+    const ontarioBaseClass = 'ontario-button';
+
+    // Variant styles combining both approaches
     const variantStyles = {
-        primary: 'bg-blue-600 hover:bg-blue-700 text-white',
-        secondary: 'bg-gray-200 hover:bg-gray-300 text-gray-800',
-        outline: 'border border-gray-300 hover:bg-gray-100 text-gray-700',
-        danger: 'bg-red-600 hover:bg-red-700 text-white',
+        primary: `${ontarioBaseClass} ${ontarioBaseClass}--primary bg-blue-600 hover:bg-blue-700 text-white`,
+        secondary: `${ontarioBaseClass} ${ontarioBaseClass}--secondary bg-gray-200 hover:bg-gray-300 text-gray-800`,
+        tertiary: `${ontarioBaseClass} ${ontarioBaseClass}--tertiary bg-transparent hover:bg-gray-100 text-blue-600 underline`,
+        outline: `${ontarioBaseClass} border border-gray-300 hover:bg-gray-100 text-gray-700`,
+        danger: `bg-red-600 hover:bg-red-700 text-white`,
     };
 
+    // Size styles
     const sizeStyles = {
         sm: 'text-sm px-3 py-1.5',
         md: 'text-base px-4 py-2',
         lg: 'text-lg px-6 py-3',
     };
 
+    // Color override styles - will be applied on top of variant styles
+    const colorStyles = {
+        default: '',
+        blue: 'bg-blue-600 hover:bg-blue-700 text-white',
+        green: 'bg-green-600 hover:bg-green-700 text-white',
+        red: 'bg-red-600 hover:bg-red-700 text-white',
+        yellow: 'bg-yellow-500 hover:bg-yellow-600 text-white',
+        purple: 'bg-purple-600 hover:bg-purple-700 text-white',
+    };
+
+    // Only apply color override if it's not the default
+    const appliedColorStyle = color === 'default' ? '' : colorStyles[color];
+
+    // Disabled styles
     const disabledStyles = (disabled || isLoading) ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer';
+
+    // Icon styles
+    const iconStyles = Icon ? 'gap-2' : '';
 
     return (
         <button
-            className={`${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${disabledStyles} ${className}`}
+            className={`${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${disabledStyles} ${widthStyles} ${appliedColorStyle} ${iconStyles} ${className}`}
             disabled={disabled || isLoading}
             {...props}
         >
@@ -50,7 +87,11 @@ const Button: React.FC<ButtonProps> = ({
                     Loading...
                 </>
             ) : (
-                children
+                <>
+                    {Icon && iconPosition === 'start' && <Icon className="h-5 w-5" />}
+                    {children}
+                    {Icon && iconPosition === 'end' && <Icon className="h-5 w-5" />}
+                </>
             )}
         </button>
     );

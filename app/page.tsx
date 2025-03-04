@@ -2,8 +2,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import DashboardHeader from '@/components/DashboardHeader';
-import MemberCard from '@/components/MemberCard';
+import SectionHeader from '@/components/ui/SectionHeader';
+import MemberCard from '@/components/onboarding/MemberCard';
 import { useTeam } from '@/app/contexts/TeamContext';
 
 export default function Home() {
@@ -68,7 +68,7 @@ export default function Home() {
 
   return (
       <div>
-        <DashboardHeader
+        <SectionHeader
             title="Team Onboarding Dashboard"
             subtitle={`Track and manage onboarding progress for ${teamMembers.length} team members`}
         />
@@ -216,9 +216,9 @@ export default function Home() {
 
         {/* Team Members Grid */}
         {!loading && !error && filteredMembers.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="flex flex-wrap gap-6">
               {sortedMembers.map((member) => (
-                  <MemberCard key={member.id} member={member} />
+                  <MemberCard key={member.id} member={member}/>
               ))}
             </div>
         )}

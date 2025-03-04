@@ -41,9 +41,9 @@ const Progress: React.FC<ProgressProps> = ({
         <div className={`w-full ${className}`}>
     {(label || showValue) && (
         <div className="flex justify-between items-center mb-1">
-        {label && <div className="text-sm font-medium text-gray-700">{label}</div>}
+        {label && <div className="font-medium text-gray-700">{label}</div>}
         {showValue && (
-            <div className="text-sm font-medium text-gray-500">
+            <div className="font-medium text-gray-500">
                 {value}/{max} ({percentage}%)
         </div>
         )}

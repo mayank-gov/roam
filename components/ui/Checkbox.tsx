@@ -25,7 +25,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
                     {...props}
                 />
             </div>
-            <div className="ml-3 text-sm">
+            <div className="ml-3">
                 <label
                     htmlFor={props.id}
                     className={`font-medium ${disabled ? 'text-gray-400' : 'text-gray-700'}`}

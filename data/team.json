@@ -11,27 +11,10 @@
       "isIncumbent": false,
       "previousCompany": null,
       "onboardingStatus": {
-        "opsLoginCreated": false,
+        "opsLoginCreated": true,
         "assetsAssigned": true,
         "accessCardSubmitted": false,
         "developerAccessGranted": false
-      }
-    },
-    {
-      "id": "2",
-      "name": "Michael Johnson",
-      "flextrackNumber": "FT54321",
-      "startDate": "2025-03-10",
-      "endDate": "2025-06-10",
-      "hiringManager": "Sarah Williams",
-      "isDeveloper": false,
-      "isIncumbent": true,
-      "previousCompany": "Internal Transfer",
-      "onboardingStatus": {
-        "opsLoginCreated": true,
-        "assetsAssigned": true,
-        "accessCardSubmitted": true,
-        "developerAccessGranted": null
       }
     },
     {
