@@ -29,7 +29,7 @@ const Button: React.FC<ButtonProps> = ({
                                            ...props
                                        }) => {
     // Base styles with Tailwind
-    const baseStyles = 'inline-flex items-center justify-center rounded font-medium focus:outline-none transition-colors';
+    const baseStyles = 'inline-flex items-center justify-center rounded font-medium focus:outline-none transition-colors ';
 
     // Width styles
     const widthStyles = fullWidth ? 'w-full' : '';
@@ -39,9 +39,9 @@ const Button: React.FC<ButtonProps> = ({
 
     // Variant styles combining both approaches
     const variantStyles = {
-        primary: `${ontarioBaseClass} ${ontarioBaseClass}--primary bg-blue-600 hover:bg-blue-700 text-white`,
-        secondary: `${ontarioBaseClass} ${ontarioBaseClass}--secondary bg-gray-200 hover:bg-gray-300 text-gray-800`,
-        tertiary: `${ontarioBaseClass} ${ontarioBaseClass}--tertiary bg-transparent hover:bg-gray-100 text-blue-600 underline`,
+        primary: `${ontarioBaseClass} ${ontarioBaseClass}--primary`,
+        secondary: `${ontarioBaseClass} ${ontarioBaseClass}--secondary`,
+        tertiary: `${ontarioBaseClass} ${ontarioBaseClass}--tertiary`,
         outline: `${ontarioBaseClass} border border-gray-300 hover:bg-gray-100 text-gray-700`,
         danger: `bg-red-600 hover:bg-red-700 text-white`,
     };

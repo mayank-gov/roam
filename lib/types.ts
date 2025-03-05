@@ -13,6 +13,7 @@ export interface TeamMember {
     isIncumbent: boolean;
     previousCompany?: PreviousCompany;
     onboardingStatus: OnboardingStatus;
+    assets?: string[]; // Added assets field
 }
 
 export interface OnboardingStatus {
@@ -22,4 +23,16 @@ export interface OnboardingStatus {
     developerAccessGranted: boolean | null; // null if not applicable
 }
 
-export interface TeamMemberFormData extends Omit<TeamMember, 'id' | 'onboardingStatus'> {}
+export interface TeamMemberFormData extends Omit<TeamMember, 'id' | 'onboardingStatus' | 'assets'> {}
+
+// Interface for assets
+export interface Asset {
+    id: string;
+    name: string;
+    type: 'Hardware' | 'Software' | 'Other';
+    status: 'Available' | 'Assigned' | 'Maintenance' | 'Retired';
+    assignedTo?: string; // Team member ID
+    purchaseDate: string;
+    serialNumber?: string;
+    notes?: string;
+}

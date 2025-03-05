@@ -28,10 +28,10 @@
       "previousCompany": "Internal Transfer",
       "id": "3",
       "onboardingStatus": {
-        "opsLoginCreated": false,
+        "opsLoginCreated": true,
         "assetsAssigned": false,
-        "accessCardSubmitted": false,
-        "developerAccessGranted": false
+        "accessCardSubmitted": true,
+        "developerAccessGranted": true
       }
     }
   ]

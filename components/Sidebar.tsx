@@ -45,9 +45,9 @@ const Sidebar: React.FC = () => {
     ];
 
     return (
-        <div className="hidden md:flex flex-col h-full w-64 bg-white border-r">
-            <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
-                <div className="flex-1 px-2 space-y-1">
+        <div className="flex flex-col h-full">
+            <div className="flex-1 py-4 overflow-y-auto">
+                <div className="px-2 space-y-1">
                     {navigation.map((item) => {
                         const isActive = item.path === pathname;
                         return (
@@ -55,22 +55,25 @@ const Sidebar: React.FC = () => {
                                 key={item.name}
                                 href={item.path}
                                 className={`
-                  group flex items-center px-2 py-2 text-sm font-medium rounded-md
+                  group flex flex-wrap items-center px-2 py-2 rounded-md
                   ${isActive
                                     ? 'bg-blue-50 text-blue-600'
                                     : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                                 }
                 `}
+                                title={item.name}
                             >
                                 <div
                                     className={`
-                    mr-3 flex-shrink-0
+                    flex-shrink-0
                     ${isActive ? 'text-blue-600' : 'text-gray-400 group-hover:text-gray-500'}
                   `}
                                 >
                                     {item.icon}
                                 </div>
-                                {item.name}
+                                <span className="sr-only md:not-sr-only md:ml-2 md:hidden xl:block">
+                  {item.name}
+                </span>
                             </Link>
                         );
                     })}

@@ -20,26 +20,20 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-        <body className="bg-gray-50">
+        <body className="bg-white">
         <TeamProvider>
             <div className="min-h-screen flex flex-col">
                 {/* Top Navigation Bar */}
                 <Header />
 
-                <div className="flex flex-1">
+                <div className="ontario-columns m-auto grid grid-cols-12 flex-1">
                     {/* Sidebar for desktop */}
-                    <Sidebar />
-
-                    {/* Main Content */}
-                    <div className="flex-1 overflow-auto">
-                        {/* Mobile Navigation */}
-
-                        <main className="">
-                            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                                {children}
-                            </div>
-                        </main>
+                    <div className="md:block md:col-span-2 bg-white border-r">
+                        <Sidebar />
                     </div>
+                    <main className="py-6 px-4 sm:px-6 lg:px-8 col-span-10">
+                        {children}
+                    </main>
                 </div>
             </div>
         </TeamProvider>

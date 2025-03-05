@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import SectionHeader from '@/components/ui/SectionHeader';
 import MemberCard from '@/components/onboarding/MemberCard';
 import { useTeam } from '@/app/contexts/TeamContext';
+import TeamMembersTable from "@/components/onboarding/TeamMemebersTable";
 
 export default function Home() {
   const { teamMembers, loading, error } = useTeam();
@@ -67,7 +68,7 @@ export default function Home() {
   const stats = calculateStats();
 
   return (
-      <div>
+      <div className="m-auto">
         <SectionHeader
             title="Team Onboarding Dashboard"
             subtitle={`Track and manage onboarding progress for ${teamMembers.length} team members`}
@@ -75,90 +76,21 @@ export default function Home() {
 
         {/* Stats Section */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <div className="bg-white p-4 rounded-lg shadow">
-            <p className="text-sm font-medium text-gray-500">Total Members</p>
-            <p className="text-2xl font-bold">{stats.total}</p>
+          <div className="bg-white p-5 rounded-lg border border-gray-300">
+            <p className="text-gray-500 mb-1">Total Members</p>
+            <h4 className="m-0">{stats.total}</h4>
           </div>
-          <div className="bg-white p-4 rounded-lg shadow">
-            <p className="text-sm font-medium text-gray-500">Not Started</p>
-            <p className="text-2xl font-bold text-red-600">{stats.notStarted}</p>
+          <div className="bg-white p-5 rounded-lg border border-gray-300">
+            <p className="text-gray-500 mb-1">Not Started</p>
+            <h4 className="text-red-600 m-0">{stats.notStarted}</h4>
           </div>
-          <div className="bg-white p-4 rounded-lg shadow">
-            <p className="text-sm font-medium text-gray-500">In Progress</p>
-            <p className="text-2xl font-bold text-yellow-600">{stats.inProgress}</p>
+          <div className="bg-white p-5 rounded-lg border border-gray-300">
+            <p className="text-gray-500 mb-1">In Progress</p>
+            <h4 className="text-yellow-600 m-0">{stats.inProgress}</h4>
           </div>
-          <div className="bg-white p-4 rounded-lg shadow">
-            <p className="text-sm font-medium text-gray-500">Completed</p>
-            <p className="text-2xl font-bold text-green-600">{stats.completed}</p>
-          </div>
-        </div>
-
-        {/* Filters and Search Section */}
-        <div className="bg-white p-4 rounded-lg shadow mb-6">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-3 md:space-y-0">
-            <div className="flex items-center space-x-4">
-              <div>
-                <label htmlFor="search" className="sr-only">Search</label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <svg className="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <input
-                      id="search"
-                      name="search"
-                      className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                      placeholder="Search by name or flextrack..."
-                      type="search"
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-4">
-              <div>
-                <label htmlFor="filterDeveloper" className="text-sm font-medium text-gray-700 mr-2">Developer:</label>
-                <select
-                    id="filterDeveloper"
-                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
-                    value={filterDeveloper === null ? '' : filterDeveloper ? 'true' : 'false'}
-                    onChange={(e) => {
-                      if (e.target.value === '') {
-                        setFilterDeveloper(null);
-                      } else {
-                        setFilterDeveloper(e.target.value === 'true');
-                      }
-                    }}
-                >
-                  <option value="">All</option>
-                  <option value="true">Yes</option>
-                  <option value="false">No</option>
-                </select>
-              </div>
-
-              <div>
-                <label htmlFor="filterIncumbent" className="text-sm font-medium text-gray-700 mr-2">Incumbent:</label>
-                <select
-                    id="filterIncumbent"
-                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
-                    value={filterIncumbent === null ? '' : filterIncumbent ? 'true' : 'false'}
-                    onChange={(e) => {
-                      if (e.target.value === '') {
-                        setFilterIncumbent(null);
-                      } else {
-                        setFilterIncumbent(e.target.value === 'true');
-                      }
-                    }}
-                >
-                  <option value="">All</option>
-                  <option value="true">Yes</option>
-                  <option value="false">No</option>
-                </select>
-              </div>
-            </div>
+          <div className="bg-white p-5 rounded-lg border border-gray-300">
+            <p className="text-gray-500 mb-1">Completed</p>
+            <h4 className="text-green-600 m-0">{stats.completed}</h4>
           </div>
         </div>
 
@@ -175,8 +107,11 @@ export default function Home() {
             <div className="bg-red-50 border-l-4 border-red-400 p-4 mb-6">
               <div className="flex">
                 <div className="flex-shrink-0">
-                  <svg className="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                  <svg className="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                       fill="currentColor" aria-hidden="true">
+                    <path fillRule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                          clipRule="evenodd"/>
                   </svg>
                 </div>
                 <div className="ml-3">
@@ -222,6 +157,10 @@ export default function Home() {
               ))}
             </div>
         )}
+
+        <div className="mt-2">
+          <TeamMembersTable/>
+        </div>
       </div>
   );
 }
